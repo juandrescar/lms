@@ -6,6 +6,8 @@ WORKDIR /app
 # Copia los archivos de dependencias
 COPY package*.json ./
 
+ENV NODE_ENV=development
+
 # Instala dependencias
 RUN npm install
 
@@ -19,5 +21,7 @@ RUN npm run build
 RUN npm install -g serve
 
 EXPOSE 3000
+EXPOSE 5173
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["npm", "run", "dev", "--", "--host"]

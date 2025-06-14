@@ -1,5 +1,8 @@
 FROM php:8.3-fpm
 
+ARG user
+ARG uid
+
 # Instala dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git \
@@ -29,6 +32,12 @@ RUN chown -R www-data:www-data /var/www \
 
 # Expone el puerto 9000 y define el usuario
 EXPOSE 9000
-USER www-data
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+USER $user
 
 CMD ["php-fpm"]
