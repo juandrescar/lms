@@ -1,13 +1,38 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "../services/api";
+import { useAuth } from "../context/AuthContext";
+import { getUsers } from "../services/userService";
+import { getBook, getBorrowed } from "../services/bookService";
+import BorrowForm from "../components/borrowings/BorrowForm";
+import ReturnButton from "../components/borrowings/ReturnButton";
 
 export default function BookDetailPage() {
+  const { user } = useAuth();
   const { id } = useParams();
+  const [users, setUsers] = useState([]);
   const [book, setBook] = useState(null);
+  const [borrowed, setBorrowed] = useState(null);
 
   useEffect(() => {
-    axios.get(`/books/${id}`).then((res) => setBook(res.data));
+    getBook(id).then((res) => setBook(res.data));
+  }, [id]);
+
+  useEffect(() => {
+    if (!book || !user) return;
+
+    if (user?.role === "admin") {
+      getUsers().then((res) => setUsers(res.data));
+    }
+
+    if (!book.available) {
+        getBorrowed(book.id)
+        .then(res => setBorrowed(res.data?.user))
+        .catch(err => console.error("Error al obtener prestatario", err));
+    }
+  }, [id, book, user]);
+
+  useEffect(() => {
+    getBook(id).then((res) => setBook(res.data));
   }, [id]);
 
   if (!book) return <p>Cargando...</p>;
@@ -26,6 +51,19 @@ export default function BookDetailPage() {
           <span className="text-red-600">Prestado</span>
         )}
       </p>
+
+      {!book.available && borrowed && (
+        <div className="mt-2 text-sm text-gray-800">
+          Prestado por: <strong>{borrowed.name}</strong> ({borrowed.email})
+          {user?.role === "admin" && (
+            <ReturnButton userId={borrowed.id} bookId={book.id} onSuccess={() => location.reload()} />
+          )}
+        </div>
+      )}
+
+      {user?.role === "admin" && book.available && users.length > 0 ? (
+        <BorrowForm book={book} users={users} />
+      ) : null}
     </div>
   );
 }

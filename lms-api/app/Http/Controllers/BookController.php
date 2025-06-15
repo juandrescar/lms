@@ -18,7 +18,6 @@ class BookController extends Controller
      */
     public function index(Book $book)
     {
-        // dd("HERE");
         return Book::all();
     }
 

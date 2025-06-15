@@ -33,7 +33,6 @@ class BookPolicy
      */
     public function create(User $user): bool
     {
-        // dd("USER", $this->isAdmin($user), $user->role);
         return $this->isAdmin($user);
     }
 

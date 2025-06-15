@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('books/{book}', [BookController::class, 'destroy']);
     Route::apiResource('users', UserController::class);
     Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::post('/users/{user}/borrowings', [BorrowingController::class, 'store']);
+    Route::delete('/users/{user}/borrowings/{book}', [BorrowingController::class, 'delete']);
+    Route::get('/users/{user}/borrowings', [BorrowingController::class, 'index']);
+    Route::get('/users/{user}/borrowings/history', [BorrowingController::class, 'history']);
+    Route::get('/books/{book}/borrowed', [BorrowingController::class, 'currentBorrowed']);
 });
 

@@ -1,4 +1,3 @@
-// src/pages/users/UserForm.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createUser, updateUser, getUsers } from '../../services/userService';
@@ -47,8 +46,9 @@ export default function UserForm() {
       <h1 className="text-2xl font-bold mb-4">{id ? 'Editar usuario' : 'Crear usuario'}</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-medium">Nombre</label>
+          <label htmlFor="name" className="block font-medium">Nombre</label>
           <input
+            id="name"
             name="name"
             value={form.name}
             onChange={handleChange}
@@ -57,8 +57,9 @@ export default function UserForm() {
           {errors.name && <p className="text-red-600 text-sm">{errors.name[0]}</p>}
         </div>
         <div>
-          <label className="block font-medium">Email</label>
+          <label htmlFor="email" className="block font-medium">Email</label>
           <input
+            id="email"
             name="email"
             type="email"
             value={form.email}
@@ -81,13 +82,14 @@ export default function UserForm() {
         </div>
         {!id && (
           <div>
-            <label className="block font-medium">Contraseña</label>
+            <label htmlFor="password" className="block font-medium">Contraseña</label>
             <input
-              name="password"
-              type="password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
+                id="password"
+                name="password"
+                type="password"
+                value={form.password}
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
             />
             {errors.password && <p className="text-red-600 text-sm">{errors.password[0]}</p>}
           </div>

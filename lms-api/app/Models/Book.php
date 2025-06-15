@@ -16,4 +16,9 @@ class Book extends Model
         'publication_year',
         'available',
     ];
+
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class);
+    }
 }

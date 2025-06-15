@@ -10,6 +10,8 @@ export const updateBook = (id, data) => api.put(`/books/${id}`, data);
 
 export const deleteBook = (id) => api.delete(`/books/${id}`);
 
+export const getBorrowed = (id) => api.get(`/books/${id}/borrowed`);
+
 export const searchBooks = (query) => {
   return api.get(`/books/search?q=${encodeURIComponent(query)}`);
 };
