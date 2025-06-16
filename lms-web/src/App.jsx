@@ -15,6 +15,7 @@ import Navbar from "./components/NavBar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BorrowedBooks from "./pages/BorrowedBooks";
 import BorrowingHistory from "./pages/BorrowingHistory";
+import UserDetailPage from "./pages/users/UserDetailPage";
 
 function App() {
   const { user } = useAuth();
@@ -39,7 +40,7 @@ function App() {
           <Route path="/users/create" element={<UserForm />} />
           <Route path="/users/edit/:id" element={<UserForm />} />
           <Route path="/users/:id/borrowings" element={<BorrowedBooks />} />
-          <Route path="/users/:id/borrowings/history" element={<BorrowingHistory />} />
+          <Route path="/users/:id/borrowings/history" element={<UserDetailPage />} />
         </Route>
         <Route path="/my-borrowings" element={<BorrowedBooks />} />
         <Route path="/my-borrowings/history" element={<BorrowingHistory />} />

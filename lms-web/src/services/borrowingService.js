@@ -13,3 +13,8 @@ export const returnBook = async (userId, bookId) => {
   const res = await api.delete(`/users/${userId}/borrowings/${bookId}`);
   return res.data;
 };
+
+export const getUserBorrowingHistory = async (userId) => {
+  const res = await api.get(`/users/${userId}/borrowings/history`);
+  return res.data;
+};

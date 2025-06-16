@@ -42,37 +42,37 @@ export default function UserForm() {
   };
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
+    <div className="p-6 max-w-xl mx-auto bg-surface rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-4">{id ? 'Editar usuario' : 'Crear usuario'}</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block font-medium">Nombre</label>
           <input
             name="name"
             value={form.name}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            placeholder="Nombre"
+            className="w-full border p-2 rounded bg-background"
           />
-          {errors.name && <p className="text-red-600 text-sm">{errors.name[0]}</p>}
+          {errors.name && <p className="text-error text-sm">{errors.name[0]}</p>}
         </div>
         <div>
-          <label className="block font-medium">Email</label>
           <input
             name="email"
             type="email"
             value={form.email}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            placeholder="Email"
+            className="w-full border p-2 rounded bg-background"
           />
-          {errors.email && <p className="text-red-600 text-sm">{errors.email[0]}</p>}
+          {errors.email && <p className="text-error text-sm">{errors.email[0]}</p>}
         </div>
         <div>
-          <label className="block font-medium">Rol</label>
           <select
             name="role"
             value={form.role}
             onChange={handleChange}
-            className="w-full border p-2 rounded"
+            placeholder="Role"
+            className="w-full border p-2 rounded bg-background"
           >
             <option value="user">Usuario</option>
             <option value="admin">Administrador</option>
@@ -80,25 +80,25 @@ export default function UserForm() {
         </div>
         {!id && (
           <div>
-            <label className="block font-medium">Contraseña</label>
             <input
               name="password"
               type="password"
               value={form.password}
               onChange={handleChange}
-              className="w-full border p-2 rounded"
+              placeholder="Contraseña"
+              className="w-full border p-2 rounded bg-background"
             />
-            {errors.password && <p className="text-red-600 text-sm">{errors.password[0]}</p>}
+            {errors.password && <p className="text-error text-sm">{errors.password[0]}</p>}
           </div>
         )}
         <div className="flex gap-4">
-          <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+          <button type="submit" className="btn bg-primary text-text-inverted px-4 py-2">
             {id ? 'Actualizar' : 'Crear'}
           </button>
           <button
             type="button"
             onClick={() => navigate('/users')}
-            className="bg-gray-300 px-4 py-2 rounded"
+            className="bg-error text-text-inverted hover:bg-error-hover px-4 py-2"
           >
             Cancelar
           </button>

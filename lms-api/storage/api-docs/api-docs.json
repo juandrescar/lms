@@ -18,23 +18,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "user@example.com"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "password"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/LoginRequest"
                             }
                         }
                     }
@@ -47,15 +31,7 @@
                                 "schema": {
                                     "properties": {
                                         "user": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string"
-                                                },
-                                                "role": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
+                                            "$ref": "#/components/schemas/UserResource"
                                         },
                                         "token": {
                                             "type": "string"
@@ -71,6 +47,278 @@
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "$ref": "#/components/schemas/Error422"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Cerrar sesión del usuario",
+                "operationId": "fe8f3429cd6979b3b4517e186505f9f9",
+                "responses": {
+                    "200": {
+                        "description": "Sesión cerrada correctamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sesión cerrada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error401"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Obtener todos los libros",
+                "operationId": "a9d13283dfab262e97af3c914d51b7a8",
+                "responses": {
+                    "200": {
+                        "description": "Lista de libros",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "book": {
+                                                "$ref": "#/components/schemas/BookResource"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Crear un nuevo libro",
+                "operationId": "47047e95a700b3271b697e57d0965191",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "author"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "El amor en los tiempos del cólera"
+                                    },
+                                    "author": {
+                                        "type": "string",
+                                        "example": "Gabriel García Márquez"
+                                    },
+                                    "ISBN": {
+                                        "type": "string",
+                                        "example": "9788439735427"
+                                    },
+                                    "publication_year": {
+                                        "type": "number",
+                                        "example": "1985"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Libro creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "book": {
+                                            "$ref": "#/components/schemas/BookResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error401"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error403"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error422"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Obtener un libro por ID",
+                "operationId": "2fdd668eb661591758aff4c56ca9b66a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del libro",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Libro encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "book": {
+                                            "$ref": "#/components/schemas/BookResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Libro no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/borrowings": {
+            "post": {
+                "tags": [
+                    "Borrowings"
+                ],
+                "summary": "Solicitar el préstamo de un libro",
+                "operationId": "71dbdaf2e2dac0ffd35a68d80f3331bd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "book_id"
+                                ],
+                                "properties": {
+                                    "book_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Préstamo registrado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 22
+                                        },
+                                        "book_id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "user_id": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "borrowed_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-06-14T18:00:00Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación o libro no disponible",
+                        "content": {
+                            "application/json": {
+                                "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
@@ -78,11 +326,11 @@
                                         },
                                         "errors": {
                                             "properties": {
-                                                "email": {
+                                                "book_id": {
                                                     "type": "array",
                                                     "items": {
                                                         "type": "string",
-                                                        "example": "Credenciales inválidas."
+                                                        "example": "Este libro no está disponible."
                                                     }
                                                 }
                                             },
@@ -94,7 +342,172 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/borrowings/{id}/return": {
+            "patch": {
+                "tags": [
+                    "Borrowings"
+                ],
+                "summary": "Marcar un préstamo como devuelto",
+                "operationId": "75869d57a383807f8d773c396d33a85e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del préstamo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Préstamo marcado como devuelto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Libro devuelto exitosamente."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Préstamo no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BookResource": {
+                "title": "Book",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Cien años de soledad"
+                    },
+                    "author": {
+                        "type": "string",
+                        "example": "Gabriel García Márquez"
+                    },
+                    "ISBN": {
+                        "type": "string",
+                        "example": "0060114185"
+                    },
+                    "publication_year": {
+                        "type": "number",
+                        "example": "1970"
+                    },
+                    "available": {
+                        "type": "boolean",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "title": "Usuario",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Error422": {
+                "title": "Error de validación",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Credenciales inválidas."
+                    },
+                    "errors": {
+                        "properties": {
+                            "email": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "example": "Credenciales inválidas."
+                                }
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Error401": {
+                "title": "Unauthorized",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Unauthenticated."
+                    }
+                },
+                "type": "object"
+            },
+            "Error403": {
+                "title": "Unauthorized",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Forbidden."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     },
@@ -102,6 +515,14 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Books",
+            "description": "Books"
+        },
+        {
+            "name": "Borrowings",
+            "description": "Borrowings"
         }
     ]
 }

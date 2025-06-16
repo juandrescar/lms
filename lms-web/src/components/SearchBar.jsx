@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch }) {
       className="mb-4"
     >
       <input
-        className="border p-2 rounded w-full"
+        className="border bg-surface p-2 rounded w-full text-text"
         placeholder="Buscar por título, autor o ISBN"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

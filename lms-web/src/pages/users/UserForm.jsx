@@ -54,7 +54,7 @@ export default function UserForm() {
             onChange={handleChange}
             className="w-full border p-2 rounded"
           />
-          {errors.name && <p className="text-red-600 text-sm">{errors.name[0]}</p>}
+          {errors.name && <p className="text-error text-sm">{errors.name[0]}</p>}
         </div>
         <div>
           <label htmlFor="email" className="block font-medium">Email</label>

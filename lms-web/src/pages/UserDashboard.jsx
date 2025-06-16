@@ -10,14 +10,14 @@ export default function UserDashboard() {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">Mis Libros Prestados</h2>
+      {/* <h2 className="text-lg font-semibold mb-4">Mis Libros Prestados</h2>
       <ul className="list-disc pl-5">
         {borrowedBooks.map((book) => (
           <li key={book.id}>
             {book.title} (devuelve antes de {book.due_date})
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

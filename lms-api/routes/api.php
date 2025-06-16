@@ -6,13 +6,13 @@ use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-//publics
+// publics
 Route::get('books', [BookController::class, 'index']);
 Route::get('books/search', [BookController::class, 'search']);
 Route::get('books/{book}', [BookController::class, 'show']);
 Route::post('/login', [AuthController::class, 'login']);
 
-//protected
+// protected
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('books', [BookController::class, 'store']);
     Route::put('books/{book}', [BookController::class, 'update']);

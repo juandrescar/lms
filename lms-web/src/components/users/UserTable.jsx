@@ -4,7 +4,7 @@ export default function UserTable({ users, onEdit, onDelete }) {
   return (
     <table className="w-full text-left border">
       <thead>
-        <tr className="bg-gray-100">
+        <tr className="bg-background text-text">
           <th className="p-2">ID</th>
           <th className="p-2">Nombre</th>
           <th className="p-2">Email</th>
@@ -22,11 +22,22 @@ export default function UserTable({ users, onEdit, onDelete }) {
             <td className="p-2 space-x-2">
               <button
                 onClick={() => navigate(`/users/edit/${user.id}`)}
-                className="text-blue-600"
+                className="text-text-inverted bg-success hover:bg-success-hover px-3 py-1 rounded"
               >
                 Editar
               </button>
-              <button onClick={() => onDelete(user.id)} className="text-red-600">Eliminar</button>
+              <button
+                onClick={() => navigate(`/users/${user.id}/borrowings/history`)}
+                className="text-text-inverted bg-secondary hover:bg-secondary px-3 py-1 rounded"
+              >
+                Historial
+              </button>
+              <button 
+                onClick={() => onDelete(user.id)}
+                className="text-text-inverted bg-error hover:bg-error-hover px-3 py-1 rounded"
+              >
+                Eliminar
+              </button>
             </td>
           </tr>
         ))}

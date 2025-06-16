@@ -20,7 +20,7 @@ class AuthService
         $user = Auth::user();
 
         return [
-            'user' => $user->only('name', 'role'),
+            'user' => $user->only('id', 'name', 'role'),
             'token' => $user->createToken('auth_token')->plainTextToken,
         ];
     }

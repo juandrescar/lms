@@ -8,22 +8,61 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Paleta base */
+  --primary-color: #004D52;
+  --primary-hover-color: #0F6F77;
+
+  --secondary-color: #00a9bd;
+  --secondary-hover-color: #018a99;
+  
+  --success-color: #22C55E;
+  --success-hover-color: #16A34A;
+
+  --warning-color: #FFB65C;
+  --warning-hover-color: #E8A648;
+
+  --error-color: #EF4444;
+  --error-hover-color: #DC2626;
+
+  /* Fondo y estructura */
+  --background-color: #F7F8FA;
+  --surface-color: #FFFFFF;
+
+  --border-color: #D1D5DB;
+  --border-hover-color: #A0AEC0;
+
+  /* Tipografía */
+  --text-color: #2E3A45;
+  --text-muted-color: #64748B;
+  --text-inverted-color: #FFFFFF;
+
+  /* Estados */
+  --disabled-bg-color: #E5E7EB;
+  --disabled-text-color: #9CA3AF;
+
+  /* Otros */
+  --focus-ring-color: #A4D64E33;
+}
+
+bg-primary {
+  background-color: var(--primary-color);
+}
+
+bg-secondary {
+  background-color: var(--secondary-color);
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -46,12 +85,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--secondary-color);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--secondary-hover-color);
 }
 button:focus,
 button:focus-visible {
@@ -59,16 +98,6 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 .input {
@@ -80,5 +109,5 @@ button:focus-visible {
 }
 
 .btn {
-  @apply bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded;
+  @apply bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded;
 }

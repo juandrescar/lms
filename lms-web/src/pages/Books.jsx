@@ -25,22 +25,24 @@ export default function Books() {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 bg-surface rounded-lg shadow-md max-w-4xl mx-auto">
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold">Lista de Libros</h1>
-                <p>{user.role}</p>
+                <h1 className="text-2xl font-bold text-primary">Lista de Libros</h1>
                 {user?.role === "admin" && (
                 <button
-                    className="btn bg-green-600 text-white"
+                    className="btn bg-primary text-text-inverted hover:bg-primary-hover"
                     onClick={() => navigate("/books/create")}
                 >
-                    ➕ Agregar libro
+                    Agregar libro
                 </button>
                 )}
             </div>
-            <h1 className="text-2xl font-bold mb-4">Lista de Libros</h1>
-            <SearchBar onSearch={handleSearch} />
-            <BookList books={books} />
+
+            <div className="sticky top-16 z-30 pb-4">
+                <h2 className="text-2xl font-bold mb-2">Lista de Libros</h2>
+                <SearchBar onSearch={handleSearch} />
+                <BookList books={books} />
+            </div>
         </div>
     );
 }

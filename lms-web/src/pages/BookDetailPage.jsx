@@ -38,23 +38,24 @@ export default function BookDetailPage() {
   if (!book) return <p>Cargando...</p>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-2">{book.title}</h1>
+    <div className="p-6 bg-surface rounded-lg shadow-md max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-2 text-primary">{book.title}</h1>
       <p>Autor: {book.author}</p>
       <p>ISBN: {book.isbn}</p>
       <p>Año: {book.publication_year}</p>
       <p>
         Estado:{" "}
         {book.available ? (
-          <span className="text-green-600">Disponible</span>
+          <span className="text-secondary">Disponible</span>
         ) : (
-          <span className="text-red-600">Prestado</span>
+          <span className="text-error">Prestado</span>
         )}
       </p>
 
       {!book.available && borrowed && (
         <div className="mt-2 text-sm text-gray-800">
-          Prestado por: <strong>{borrowed.name}</strong> ({borrowed.email})
+          Prestado a: <strong>{borrowed.name}</strong> ({borrowed.email})
+          <br />
           {user?.role === "admin" && (
             <ReturnButton userId={borrowed.id} bookId={book.id} onSuccess={() => location.reload()} />
           )}

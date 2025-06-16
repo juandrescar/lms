@@ -17,18 +17,18 @@ export default function BookForm() {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
+    <div className="p-6 max-w-md mx-auto bg-surface rounded-lg shadow-md">
       <h1 className="text-xl font-bold mb-4">Agregar Libro</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <input {...register("title", { required: true })} className="input" placeholder="Título" />
-        <input {...register("author", { required: true })} className="input" placeholder="Autor" />
-        <input {...register("ISBN", { required: true })} className="input" placeholder="ISBN" />
-        <input {...register("publication_year", { required: true })} type="number" className="input" placeholder="Año de publicación" />
-        <select {...register("available")} className="input">
+        <input {...register("title", { required: true })} className="input bg-background" placeholder="Título" />
+        <input {...register("author", { required: true })} className="input bg-background" placeholder="Autor" />
+        <input {...register("ISBN", { required: true })} className="input bg-background" placeholder="ISBN" />
+        <input {...register("publication_year", { required: true })} type="number" className="input bg-background" placeholder="Año de publicación" />
+        <select {...register("available")} className="input bg-background">
           <option value={1}>Disponible</option>
           <option value={0}>No disponible</option>
         </select>
-        <button type="submit" className="btn bg-blue-600 text-white">Crear</button>
+        <button type="submit" className="btn text-white">Crear</button>
       </form>
     </div>
   );

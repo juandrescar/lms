@@ -130,7 +130,7 @@ class BorrowingTest extends TestCase
 
         // Préstamo de 3 libros
         foreach ($books->take(3) as $book) {
-            $response =  $this->actingAs($this->admin, 'sanctum')->postJson("/api/users/{$this->user->id}/borrowings", [
+            $response = $this->actingAs($this->admin, 'sanctum')->postJson("/api/users/{$this->user->id}/borrowings", [
                 'book_id' => $book->id,
             ]);
             $response->assertStatus(200);
@@ -163,4 +163,3 @@ class BorrowingTest extends TestCase
         ]);
     }
 }
-
