@@ -17,7 +17,7 @@ services:
     networks:
       - lms
     depends_on:
-      - db
+      - lms-mysql
 
   lms-web:
     build:
@@ -50,7 +50,7 @@ services:
     networks:
       - lms
 
-  db:
+  lms-mysql:
     image: mysql:8.0
     container_name: lms-mysql
     restart: unless-stopped

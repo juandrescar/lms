@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import BookList from "../components/BookList";
-import SearchBar from "../components/SearchBar";
-import { getBooks, searchBooks } from "../services/bookService";
+import { useAuth } from "../../context/AuthContext";
+import BookList from "../../components/books/BookList";
+import SearchBar from "../../components/SearchBar";
+import { getBooks, searchBooks } from "../../services/bookService";
 
 export default function Books() {
     const [books, setBooks] = useState([]);

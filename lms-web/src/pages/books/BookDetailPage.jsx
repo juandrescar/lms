@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { getUsers } from "../services/userService";
-import { getBook, getBorrowed } from "../services/bookService";
-import BorrowForm from "../components/borrowings/BorrowForm";
-import ReturnButton from "../components/borrowings/ReturnButton";
+import { useAuth } from "../../context/AuthContext";
+import { getUsers } from "../../services/userService";
+import { getBook, getBorrowed } from "../../services/bookService";
+import BorrowForm from "../../components/borrowings/BorrowForm";
+import ReturnButton from "../../components/borrowings/ReturnButton";
 
 export default function BookDetailPage() {
   const { user } = useAuth();
@@ -41,7 +41,7 @@ export default function BookDetailPage() {
     <div className="p-6 bg-surface rounded-lg shadow-md max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-2 text-primary">{book.title}</h1>
       <p>Autor: {book.author}</p>
-      <p>ISBN: {book.isbn}</p>
+      <p>ISBN: {book.ISBN}</p>
       <p>Año: {book.publication_year}</p>
       <p>
         Estado:{" "}

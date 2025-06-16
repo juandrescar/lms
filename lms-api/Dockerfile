@@ -26,6 +26,11 @@ COPY . .
 # Instala dependencias de Laravel
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
+# Copia el entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+
 # Permisos para Laravel
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
@@ -40,4 +45,4 @@ RUN mkdir -p /home/$user/.composer && \
 
 USER $user
 
-CMD ["php-fpm"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

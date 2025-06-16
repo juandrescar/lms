@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { getBorrowings, getHistory } from "../services/borrowingService";
+import { useAuth } from "../../context/AuthContext";
+import { getBorrowings, getHistory } from "../../services/borrowingService";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
-import UserBorrowingHistoryTable from "../components/borrowings/UserBorrowingHistoryTable";
-import UserBorrowedHistoryTable from "../components/borrowings/UserBorrowedHistoryTable";
+import UserBorrowedHistoryTable from "../../components/borrowings/UserBorrowedHistoryTable";
 
 export default function BorrowedBooks() {
   const { user } = useAuth();
