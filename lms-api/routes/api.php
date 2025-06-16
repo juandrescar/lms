@@ -17,13 +17,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('books', [BookController::class, 'store']);
     Route::put('books/{book}', [BookController::class, 'update']);
     Route::delete('books/{book}', [BookController::class, 'destroy']);
-    Route::apiResource('users', UserController::class);
     Route::post('logout', [AuthController::class, 'logout']);
-
+    
     Route::post('/users/{user}/borrowings', [BorrowingController::class, 'store']);
     Route::delete('/users/{user}/borrowings/{book}', [BorrowingController::class, 'delete']);
     Route::get('/users/{user}/borrowings', [BorrowingController::class, 'index']);
     Route::get('/users/{user}/borrowings/history', [BorrowingController::class, 'history']);
     Route::get('/books/{book}/borrowed', [BorrowingController::class, 'currentBorrowed']);
+    
+    Route::apiResource('users', UserController::class);
 });
 

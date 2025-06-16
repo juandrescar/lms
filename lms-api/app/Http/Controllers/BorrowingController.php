@@ -13,66 +13,104 @@ class BorrowingController extends Controller
 {
     use AuthorizesRequests;
 
+    /**
+     * @OA\Get(
+     *     path="/api/users/{user}/borrowings",
+     *     summary="Listar préstamos activos de un usuario",
+     *     description="Devuelve los préstamos activos (no devueltos) del usuario especificado.",
+     *     operationId="getUserBorrowings",
+     *     tags={"Borrowings"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID del usuario",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de préstamos activos",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Borrowing")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(ref="#/components/schemas/Error401")
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden",
+     *         @OA\JsonContent(ref="#/components/schemas/Error403")
+     *     ),
+     * )
+     */
     public function index(User $user)
     {
+        // dd($user);
         Gate::authorize('view-borrowings', $user);
         $borrowings = Borrowing::with('book')
             ->where('user_id', $user->id)
             ->whereNull('returned_at')
             ->get();
+        
+
 
         return response()->json($borrowings);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/borrowings",
+     *     path="/api/users/{user}/borrowings",
      *     summary="Solicitar el préstamo de un libro",
+     *     description="Permite a un usuario solicitar el préstamo de un libro disponible.",
+     *     operationId="borrowBook",
      *     tags={"Borrowings"},
      *     security={{"sanctum":{}}},
-     *
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID del usuario",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\RequestBody(
      *         required=true,
-     *
      *         @OA\JsonContent(
      *             required={"book_id"},
-     *
      *             @OA\Property(property="book_id", type="integer", example=1)
      *         )
      *     ),
-     *
      *     @OA\Response(
-     *         response=201,
-     *         description="Préstamo registrado exitosamente",
-     *
+     *         response=200,
+     *         description="Libro prestado exitosamente",
      *         @OA\JsonContent(
-     *
-     *             @OA\Property(property="id", type="integer", example=22),
-     *             @OA\Property(property="book_id", type="integer", example=1),
-     *             @OA\Property(property="user_id", type="integer", example=5),
-     *             @OA\Property(property="borrowed_at", type="string", format="date-time", example="2025-06-14T18:00:00Z")
+     *             @OA\Property(property="message", type="string", example="Book borrowed successfully")
      *         )
      *     ),
-     *
      *     @OA\Response(
-     *         response=422,
-     *         description="Error de validación o libro no disponible",
-     *
+     *         response=401,
+     *         description="Unauthorized",
+     *         @OA\JsonContent(ref="#/components/schemas/Error401")
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="Forbidden: El usuario no tiene permiso o alcanzó el límite de préstamos.",
      *         @OA\JsonContent(
-     *
-     *             @OA\Property(property="message", type="string", example="Credenciales inválidas."),
-     *             @OA\Property(
-     *                 property="errors",
-     *                 type="object",
-     *                 @OA\Property(
-     *                     property="book_id",
-     *                     type="array",
-     *
-     *                     @OA\Items(type="string", example="Este libro no está disponible.")
-     *                 )
-     *             )
+     *             oneOf={
+     *                 @OA\Schema(ref="#/components/schemas/Error403Limit"),
+     *                 @OA\Schema(ref="#/components/schemas/Error403"),
+     *             }
      *         )
-     *     )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/Error400Unavailable")
+     *     ),
      * )
      */
     public function store(Request $request, User $user)
@@ -108,35 +146,40 @@ class BorrowingController extends Controller
     }
 
     /**
-     * @OA\Patch(
-     *     path="/api/borrowings/{id}/return",
-     *     summary="Marcar un préstamo como devuelto",
+     * @OA\Delete(
+     *     path="/api/users/{user}/borrowings/{book}",
+     *     summary="Devolver un libro prestado",
+     *     description="Permite a un usuario devolver un libro que tiene prestado.",
+     *     operationId="returnBook",
      *     tags={"Borrowings"},
      *     security={{"sanctum":{}}},
-     *
      *     @OA\Parameter(
-     *         name="id",
+     *         name="user",
      *         in="path",
-     *         description="ID del préstamo",
+     *         description="ID del usuario",
      *         required=true,
-     *
      *         @OA\Schema(type="integer")
      *     ),
-     *
+     *     @OA\Parameter(
+     *         name="book",
+     *         in="path",
+     *         description="ID del libro",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Préstamo marcado como devuelto",
-     *
+     *         description="Libro devuelto exitosamente",
      *         @OA\JsonContent(
-     *
-     *             @OA\Property(property="message", type="string", example="Libro devuelto exitosamente.")
+     *             @OA\Property(property="message", type="string", example="Book returned successfully")
      *         )
      *     ),
-     *
      *     @OA\Response(
      *         response=404,
-     *         description="Préstamo no encontrado"
-     *     )
+     *         description="Not Found",
+     *         @OA\JsonContent(ref="#/components/schemas/Error404")
+     *     ),
+     * )
      * )
      */
     public function delete(User $user, Book $book)
@@ -155,6 +198,31 @@ class BorrowingController extends Controller
         return response()->json(['message' => 'Book returned successfully']);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/users/{user}/borrowings/history",
+     *     summary="Historial de préstamos de un usuario",
+     *     description="Devuelve el historial completo de préstamos (incluyendo los devueltos) del usuario.",
+     *     operationId="getUserBorrowingHistory",
+     *     tags={"Borrowings"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID del usuario",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Historial de préstamos",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Borrowing")
+     *         )
+     *     )
+     * )
+     */
     public function history(User $user)
     {
         Gate::authorize('view-borrowings', $user);
@@ -167,6 +235,34 @@ class BorrowingController extends Controller
         return response()->json($borrowings);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/books/{book}/current-borrowed",
+     *     summary="Consultar quién tiene prestado un libro",
+     *     description="Devuelve el usuario que actualmente tiene prestado el libro especificado.",
+     *     operationId="getCurrentBorrower",
+     *     tags={"Borrowings"},
+     *     security={{"sanctum":{}}},
+     *     @OA\Parameter(
+     *         name="book",
+     *         in="path",
+     *         description="ID del libro",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Usuario que tiene el libro prestado",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user", type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Juan Pérez"),
+     *                 @OA\Property(property="email", type="string", example="juan@example.com")
+     *             )
+     *         )
+     *     ),
+     * )
+     */
     public function currentBorrowed(Book $book)
     {
         $borrowing = $book->borrowings()

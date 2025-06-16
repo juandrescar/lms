@@ -16,3 +16,28 @@ namespace App\Docs;
  * )
  */
 class BookResource {}
+
+ /**
+ * @OA\Schema(
+ *     schema="Error422Book",
+ *     type="object",
+ *     title="Error de validación",
+ *     @OA\Property(property="result", type="string", example="error"),
+ *     @OA\Property(property="message", type="string", example="Datos inválidos."),
+ *     @OA\Property(
+ *         property="errors",
+ *         type="object",
+ *         @OA\Property(
+ *             property="tittle",
+ *             type="array",
+ *             @OA\Items(type="string", example="The title field is required.")
+ *         ),
+ *         @OA\Property(
+ *             property="ISBN",
+ *             type="array",
+ *             @OA\Items(type="string", example="The i s b n has already been taken.")
+ *         )
+ *     )
+ * )
+ */
+class Error422Book {}

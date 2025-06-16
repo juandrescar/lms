@@ -18,6 +18,7 @@ class LoginRequest {}
  *     schema="UserResource",
  *     type="object",
  *     title="Usuario",
+ *     @OA\Property(property="id", type="string"),
  *     @OA\Property(property="name", type="string"),
  *     @OA\Property(property="role", type="string")
  * )
@@ -48,6 +49,7 @@ class Error422 {}
  *     schema="Error401",
  *     type="object",
  *     title="Unauthorized",
+ *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Unauthenticated."),
  * )
  */
@@ -57,8 +59,9 @@ class Error401 {}
  * @OA\Schema(
  *     schema="Error403",
  *     type="object",
- *     title="Unauthorized",
- *     @OA\Property(property="message", type="string", example="Forbidden."),
+ *     title="Forbidden",
+ *     @OA\Property(property="result", type="string", example="error"),
+ *     @OA\Property(property="message", type="string", example="Prohibido – Usted no tiene permiso para acceder a este servidor"),
  * )
  */
 class Error403 {}
