@@ -27,6 +27,7 @@ Sistema de gestión de biblioteca compuesto por un backend en Laravel y un front
 Desde la raíz del proyecto:
 
 ```sh
+cd lms
 docker-compose up --build
 ```
 
@@ -38,7 +39,7 @@ Esto levantará:
 - **Servidor web**: Nginx en el contenedor `web`
 
 Accesos por defecto:
-- Frontend: [http://localhost:3000](http://localhost:3000)
+- Frontend: [http://localhost:5173](http://localhost:5173)
 - Backend API: [http://localhost:8080/api](http://localhost:8080/api)
 - Documentación Swagger: [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation)
 
@@ -221,7 +222,7 @@ borrowBook(userId, bookId).then(data => console.log(data));
 | Fecha       | Hito / Actividad                                   |
 |-------------|----------------------------------------------------|
 | 2024-06-14  | Inicialización del repositorio y setup de Laravel y React  |
-| 2024-06-11  | Módulos: User y Book       |
+| 2024-06-14  | Módulos: User y Book       |
 | 2024-06-15  | Módulo de Borrowing, Mejoras de visuales de la interfaz                |
 | 2024-06-16  | Documentación   |              |
 

@@ -6,8 +6,6 @@ WORKDIR /app
 # Copia los archivos de dependencias
 COPY package*.json ./
 
-ENV NODE_ENV=development
-
 # Instala dependencias
 RUN npm install
 
@@ -16,6 +14,8 @@ COPY . .
 
 # Construye la aplicación para producción
 RUN npm run build
+
+ENV NODE_ENV=production
 
 # Sirve la aplicación con un servidor estático (por ejemplo, serve)
 RUN npm install -g serve
