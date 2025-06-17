@@ -7,6 +7,7 @@ namespace App\Docs;
  *     schema="BookResource",
  *     type="object",
  *     title="Book",
+ *
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="title", type="string", example="Cien años de soledad"),
  *     @OA\Property(property="author", type="string", example="Gabriel García Márquez"),
@@ -17,11 +18,12 @@ namespace App\Docs;
  */
 class BookResource {}
 
- /**
+/**
  * @OA\Schema(
  *     schema="Error422Book",
  *     type="object",
  *     title="Error de validación",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Datos inválidos."),
  *     @OA\Property(
@@ -30,11 +32,14 @@ class BookResource {}
  *         @OA\Property(
  *             property="tittle",
  *             type="array",
+ *
  *             @OA\Items(type="string", example="The title field is required.")
  *         ),
+ *
  *         @OA\Property(
  *             property="ISBN",
  *             type="array",
+ *
  *             @OA\Items(type="string", example="The i s b n has already been taken.")
  *         )
  *     )

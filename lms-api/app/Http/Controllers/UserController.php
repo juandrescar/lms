@@ -18,19 +18,25 @@ class UserController extends Controller
      *     summary="Listar usuarios",
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Lista de usuarios",
+     *
      *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/User"))
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error401")
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="Forbidden",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error403")
      *     )
      * )
@@ -48,28 +54,38 @@ class UserController extends Controller
      *     summary="Crear usuario",
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(ref="#/components/schemas/UserCreateRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Usuario creado",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/User")
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error401")
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="Forbidden",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error403")
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Unprocessable Content",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error422User")
      *     )
      * )
@@ -89,30 +105,40 @@ class UserController extends Controller
      *     summary="Mostrar usuario",
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Usuario encontrado",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/User")
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error401")
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="Forbidden",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error403")
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Not Found",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error404")
      *     )
      * )
@@ -130,39 +156,53 @@ class UserController extends Controller
      *     summary="Actualizar usuario",
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(ref="#/components/schemas/UserUpdateRequest")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Usuario actualizado",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/User")
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error401")
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="Forbidden",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error403")
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Not Found",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error404")
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Unprocessable Content",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error422User")
      *     )
      * )
@@ -187,12 +227,15 @@ class UserController extends Controller
      *     summary="Eliminar usuario",
      *     tags={"Users"},
      *     security={{"sanctum":{}}},
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\Response(
      *         response=204,
      *         description="Usuario eliminado"
@@ -200,16 +243,21 @@ class UserController extends Controller
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error401")
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="Forbidden",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error403")
      *     ),
+     *
      *     @OA\Response(
      *         response=404,
      *         description="Not Found",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Error404")
      *     ),
      * )

@@ -21,7 +21,6 @@ return Application::configure(basePath: dirname(__DIR__))
         // General exception handler
 
         $exceptions->render(function (\Throwable $exception, $request) {
-            // dd($exception); // Log the exception for debugging purposes
             $data = [
                 'result' => 'error',
                 'message' => $exception->getMessage() ?? 'Error interno del servidor',

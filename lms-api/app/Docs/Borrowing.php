@@ -8,6 +8,7 @@ namespace App\Docs;
  *   type="object",
  *   title="Borrowing",
  *   required={"id", "user_id", "book_id", "borrowed_at", "due_date"},
+ *
  *   @OA\Property(property="id", type="integer", example=100),
  *   @OA\Property(property="user_id", type="integer", example=1),
  *   @OA\Property(property="book_id", type="integer", example=10),
@@ -25,6 +26,7 @@ class Borrowing {}
  *   type="object",
  *   title="Book",
  *   required={"id", "title", "author", "available"},
+ *
  *   @OA\Property(property="id", type="integer", example=10),
  *   @OA\Property(property="title", type="string", example="Cien años de soledad"),
  *   @OA\Property(property="author", type="string", example="Gabriel García Márquez"),
@@ -38,6 +40,7 @@ class BookBorrowing {}
  *     schema="Error403Limit",
  *     type="object",
  *     title="Forbidden",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="You cannot borrow more than 3 books"),
  * )
@@ -49,6 +52,7 @@ class Error403Limit {}
  *     schema="Error400Unavailable",
  *     type="object",
  *     title="Forbidden",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Book is not available"),
  * )

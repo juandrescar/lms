@@ -17,13 +17,13 @@ class AuthServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->authService = new AuthService();
+        $this->authService = new AuthService;
     }
 
     public function test_login_successful()
     {
         $user = User::factory()->create([
-            'name'=> 'Test User',
+            'name' => 'Test User',
             'email' => 'user@example.com',
             'password' => bcrypt('secret123'),
             'role' => 'user',

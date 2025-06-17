@@ -27,7 +27,7 @@ export default function Books() {
     return (
         <div className="p-6 bg-surface rounded-lg shadow-md max-w-4xl mx-auto">
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-2xl font-bold text-primary">Lista de Libros</h1>
+                <h1 className="text-2xl font-bold text-primary">Libros</h1>
                 {user?.role === "admin" && (
                 <button
                     className="btn bg-primary text-text-inverted hover:bg-primary-hover"

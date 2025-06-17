@@ -7,6 +7,7 @@ namespace App\Docs;
  *   schema="User",
  *   type="object",
  *   required={"id", "name", "email"},
+ *
  *   @OA\Property(property="id", type="integer", example=1),
  *   @OA\Property(property="name", type="string", example="Juan Pérez"),
  *   @OA\Property(property="email", type="string", format="email", example="juan@example.com"),
@@ -15,13 +16,14 @@ namespace App\Docs;
  *   @OA\Property(property="updated_at", type="string", format="date-time", example="2024-06-16T12:34:56Z")
  * )
  */
- class User {}
+class User {}
 
 /**
  * @OA\Schema(
  *   schema="UserCreateRequest",
  *   type="object",
  *   required={"name", "email", "password"},
+ *
  *   @OA\Property(property="name", type="string", example="Juan Pérez"),
  *   @OA\Property(property="email", type="string", format="email", example="juan@example.com"),
  *   @OA\Property(property="password", type="string", format="password", example="secret123"),
@@ -34,12 +36,13 @@ namespace App\Docs;
  *   )
  * )
  */
- class UserCreateRequest {}
+class UserCreateRequest {}
 
 /**
  * @OA\Schema(
  *   schema="UserUpdateRequest",
  *   type="object",
+ *
  *   @OA\Property(property="name", type="string", example="Juan Pérez"),
  *   @OA\Property(property="email", type="string", format="email", example="juan@example.com"),
  *   @OA\Property(
@@ -51,13 +54,14 @@ namespace App\Docs;
  *   )
  * )
  */
- class UserUpdateRequest {}
+class UserUpdateRequest {}
 
- /**
+/**
  * @OA\Schema(
  *     schema="Error422User",
  *     type="object",
  *     title="Error de validación",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Datos inválidos."),
  *     @OA\Property(
@@ -66,6 +70,7 @@ namespace App\Docs;
  *         @OA\Property(
  *             property="role",
  *             type="array",
+ *
  *             @OA\Items(type="string", example="The role field is required.")
  *         )
  *     )

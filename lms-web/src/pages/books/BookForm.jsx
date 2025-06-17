@@ -9,7 +9,6 @@ export default function BookForm() {
   const [errors, setErrors] = useState({})
 
   const onSubmit = async (data) => {
-    // data.preventDefault();
     setErrors({});
 
     try {

@@ -4,12 +4,10 @@ import { MemoryRouter } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import * as bookService from "../../services/bookService";
 
-// Mock del contexto de autenticación
 vi.mock("../../context/AuthContext", () => ({
   useAuth: vi.fn(),
 }));
 
-// Mock del servicio de libros
 vi.mock("../../services/bookService", () => ({
   getBooks: vi.fn(),
   searchBooks: vi.fn(),
@@ -22,7 +20,6 @@ const mockBooks = [
 
 describe("Books Page", () => {
   beforeEach(() => {
-    // Por defecto, es admin
     useAuth.mockReturnValue({ user: { role: "admin" } });
     bookService.getBooks.mockResolvedValue({ data: mockBooks });
   });
@@ -34,7 +31,6 @@ describe("Books Page", () => {
       </MemoryRouter>
     );
 
-    // Espera que los libros se carguen
     expect(await screen.findByText("Libro A")).toBeInTheDocument();
     expect(screen.getByText("Libro B")).toBeInTheDocument();
   });

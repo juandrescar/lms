@@ -18,6 +18,7 @@ class LoginRequest {}
  *     schema="UserResource",
  *     type="object",
  *     title="Usuario",
+ *
  *     @OA\Property(property="id", type="string"),
  *     @OA\Property(property="name", type="string"),
  *     @OA\Property(property="role", type="string")
@@ -30,6 +31,7 @@ class UserResource {}
  *     schema="Error422",
  *     type="object",
  *     title="Error de validación",
+ *
  *     @OA\Property(property="message", type="string", example="Credenciales inválidas."),
  *     @OA\Property(
  *         property="errors",
@@ -37,6 +39,7 @@ class UserResource {}
  *         @OA\Property(
  *             property="email",
  *             type="array",
+ *
  *             @OA\Items(type="string", example="Credenciales inválidas.")
  *         )
  *     )
@@ -49,6 +52,7 @@ class Error422 {}
  *     schema="Error401",
  *     type="object",
  *     title="Unauthorized",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Unauthenticated."),
  * )
@@ -60,6 +64,7 @@ class Error401 {}
  *     schema="Error403",
  *     type="object",
  *     title="Forbidden",
+ *
  *     @OA\Property(property="result", type="string", example="error"),
  *     @OA\Property(property="message", type="string", example="Prohibido – Usted no tiene permiso para acceder a este servidor"),
  * )

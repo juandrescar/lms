@@ -12,6 +12,7 @@ class BorrowingTest extends TestCase
     use RefreshDatabase;
 
     private User $admin;
+
     private User $user;
 
     protected function setUp(): void
